@@ -56,6 +56,12 @@ namespace SchoolChoicePlayground.Models
             return query.Single<School>();
         }
 
+        public Address GetSchoolAddress(int id)
+        {
+            var query = from school in _context.Schools where school.SchoolId == id select school.address;
+            return query.Single<Address>();
+        }
+
         public void AddUserToContext(SchoolAppUser user_to_add)
         {
             if (user_to_add.email != null)

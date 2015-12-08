@@ -308,6 +308,24 @@ namespace SchoolChoicePlayground.Tests.Models
             Assert.AreEqual(1, currentUser.userSchools.Count());
         }
 
+        [TestMethod]
+        public void AppRepoCanRetrieveAddressOfSchool()
+        {
+            List<School> schools = new List<School> {
+                new School { SchoolId = 123,
+                    name = "LEAD Academy",
+                    address = new Address { Line1 = "1704 Herman St", city = "Nashville", state = Address.State.TN, zip = "37208" }
+                },
+                new School { SchoolId = 456, name = "Rocketship Academy" }
+            };
+            mock_school_set.Object.AddRange(schools);
+            ConnectMocksToDataStore(schools);
+
+
+            Address expected = _repository.GetSchoolAddress(123);
+            Assert.AreEqual(expected.Line1, "1704 Herman St");
+        }
+
 
     }
 }
