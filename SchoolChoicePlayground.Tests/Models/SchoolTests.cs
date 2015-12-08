@@ -30,14 +30,14 @@ namespace SchoolChoicePlayground.Tests
                 state = Address.State.TN,
                 zip = "37208"
             };
-            school.phoneNum = 615 - 555 - 5555;
+            school.phoneNum = "6155555555";
             school.lat = 86.164893;
             school.lat = -37.164893;
-            school.Users = new List<User>
+            school.Users = new List<SchoolAppUser>
             {
-                new User { name = "Tom Griffey" },
-                new User { name = "Random Parent" },
-                new User { name = "Helicopter Mom" }
+                new SchoolAppUser { name = "Tom Griffey" },
+                new SchoolAppUser { name = "Random Parent" },
+                new SchoolAppUser { name = "Helicopter Mom" }
             };
             school.level = School.schoolLevel.High;
 
@@ -48,20 +48,20 @@ namespace SchoolChoicePlayground.Tests
         [TestMethod]
         public void SchoolEnsureSchoolHasUsers()
         {
-            List<User> users = new List<User>
+            List<SchoolAppUser> users = new List<SchoolAppUser>
             {
-                new User { name = "Tom Griffey" },
-                new User { name = "Random Parent" },
-                new User { name = "Helicopter Mom" }
+                new SchoolAppUser { name = "Tom Griffey" },
+                new SchoolAppUser { name = "Random Parent" },
+                new SchoolAppUser { name = "Helicopter Mom" }
             };
 
             School school = new School();
             school.name = "LEAD High School";
-            school.Users = new List<User>
+            school.Users = new List<SchoolAppUser>
             {
-                new User { name = "Tom Griffey" },
-                new User { name = "Random Parent" },
-                new User { name = "Helicopter Mom" }
+                new SchoolAppUser { name = "Tom Griffey" },
+                new SchoolAppUser { name = "Random Parent" },
+                new SchoolAppUser { name = "Helicopter Mom" }
             };
 
             Assert.AreEqual(school.Users[0].name, "Tom Griffey");

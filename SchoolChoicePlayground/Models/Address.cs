@@ -24,7 +24,7 @@ namespace SchoolChoicePlayground.Models
         public State state { get; set; }
         [RegularExpression(@"[\d]{5}")]
         public string zip { get; set; }
-        public School owner { get; set; }
+        public School school { get; set; }
 
         public void Validate()
         {

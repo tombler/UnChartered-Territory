@@ -11,15 +11,15 @@ namespace SchoolChoicePlayground.Tests.Models
         [TestMethod]
         public void UserHasAllProperties()
         {
-            User new_user = new User();
+            SchoolAppUser new_user = new SchoolAppUser();
             new_user.name = "Hockey Dad";
-            new_user.phoneNum = 615 - 555 - 5555;
+            new_user.phoneNum = "615 - 555 - 5555";
             new_user.email = "tgriffey@charter.net";
             new_user.alerts = true;
             Assert.IsNotNull(new_user);
             Assert.AreEqual(new_user.name, "Hockey Dad");
             Assert.IsTrue(new_user.alerts);
-            Assert.AreEqual(new_user.phoneNum, 615 - 555 - 5555);
+            Assert.AreEqual(new_user.phoneNum, "615 - 555 - 5555");
         }
 
         [TestMethod]
@@ -31,7 +31,7 @@ namespace SchoolChoicePlayground.Tests.Models
                 new School { name = "Republic Middle School" }
             };
 
-            User new_user = new User();
+            SchoolAppUser new_user = new SchoolAppUser();
             new_user.name = "Hockey Dad";
             new_user.userSchools = schools;
             CollectionAssert.AreEqual(new_user.userSchools, schools);
