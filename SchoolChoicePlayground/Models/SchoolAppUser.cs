@@ -16,7 +16,7 @@ namespace SchoolChoicePlayground.Models
         public string phoneNum { get; set; }
         public string provider { get; set; } // For sending texts via email if alerts are on
         public string email { get; set; }
-        public List<School> userSchools { get; set; }
+        public virtual List<School> userSchools { get; set; }
         public bool alerts { get; set; }
     }
 }
