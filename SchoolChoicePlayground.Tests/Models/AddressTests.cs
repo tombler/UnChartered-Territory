@@ -78,11 +78,5 @@ namespace SchoolChoicePlayground.Tests.Models
             schoolAddress.Validate();
         }
 
-        [TestMethod]
-        public void MyTestMethod()
-        {
-
-        }
-
     }
 }
