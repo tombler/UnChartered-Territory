@@ -10,9 +10,11 @@ namespace SchoolChoicePlayground.Models
     {
         [Key]
         public int UserId { get; set; }
+        // Foriegn key to AppUser
+        public virtual ApplicationUser RealUser { get; set; }
+
         [Required]
         public string name { get; set; }
-        [Phone]
         public string phoneNum { get; set; }
         public string provider { get; set; } // For sending texts via email if alerts are on
         public string email { get; set; }

@@ -1,7 +1,9 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Web;
@@ -18,13 +20,14 @@ namespace SchoolChoicePlayground.Models
 
         [Key]
         public int AddressId { get; set; }
+        [JsonProperty("addressLine1")]
         public string Line1 { get; set; }
         public string Line2 { get; set; }
         public string city { get; set; }
         public State state { get; set; }
         [RegularExpression(@"[\d]{5}")]
         public string zip { get; set; }
-        public virtual School school { get; set; }
+        public School school { get; set; }
 
         public void Validate()
         {

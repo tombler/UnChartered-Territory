@@ -7,10 +7,7 @@ using System.Linq;
 using System.Collections.Generic;
 
 // ***** Questions:
-// 1. Should I be querying users, schools by Id? How will I store / have access to it when actualDB is created? Store Id in controller?
-// 2. How to query many to many relationships in LINQ?
-// 3. ** Before ^: how to stub user.userSchools getter??
-// 4. How to update info in DB ? See  AppRepoCanUpdateUserProfileEmptyFields 
+// 1. How to update info in DB ? See  AppRepoCanUpdateUserProfileEmptyFields 
 
 namespace SchoolChoicePlayground.Tests.Models
 {
