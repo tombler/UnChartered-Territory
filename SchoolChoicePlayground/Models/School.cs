@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
@@ -20,7 +21,7 @@ namespace SchoolChoicePlayground.Models
         public string grades { get; set; }
         [Required]
         public virtual Address address { get; set; }
-        [Phone]
+        [JsonProperty("phone")]
         public string phoneNum { get; set; }
         public double lat { get; set; }
         public double lng { get; set; }
@@ -28,8 +29,11 @@ namespace SchoolChoicePlayground.Models
         public string addlInfo { get; set; }
         public virtual List<User> Users { get; set; }
         [Required]
+        [JsonProperty("schoolLevel")]
         public schoolLevel level { get; set; }
+        [JsonProperty("schoolType")]
         public schoolType type { get; set; }
+        [JsonProperty("link")]
         public string website { get; set; }
 
         public int CompareTo(object obj)

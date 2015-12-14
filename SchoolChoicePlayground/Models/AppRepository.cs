@@ -32,7 +32,7 @@ namespace SchoolChoicePlayground.Models
 
         public List<User> GetAllUsers()
         {
-            var query = from users in _context.Users select users;
+            var query = from users in _context.SchoolUsers select users;
             List<User> all_users = query.ToList();
             return all_users;
         }
@@ -40,7 +40,7 @@ namespace SchoolChoicePlayground.Models
         // Retrieve specific user's data (profile, schools)
         public User GetUserById(string id)
         {
-            var query = from user in _context.Users where user.UserId == id select user;
+            var query = from user in _context.SchoolUsers where user.UserId == id select user;
             return query.SingleOrDefault();
         }
 
@@ -67,13 +67,13 @@ namespace SchoolChoicePlayground.Models
             //{
             //    CheckIfUserEmailExists(user_to_add.email);
             //}
-            _context.Users.Add(user_to_add);
+            _context.SchoolUsers.Add(user_to_add);
             _context.SaveChanges();
         }
 
         private void CheckIfUserEmailExists(string email)
         {
-            var query = from user in _context.Users
+            var query = from user in _context.SchoolUsers
                         where user.email == email
                         select user;
             if (query != null)
@@ -85,7 +85,7 @@ namespace SchoolChoicePlayground.Models
         // Get User's schools
         public List<School> GetUserSchools(User currentUser)
         {
-            var query = from u in _context.Users where u.UserId == currentUser.UserId select u;
+            var query = from u in _context.SchoolUsers where u.UserId == currentUser.UserId select u;
             User found_user = query.Single<User>();
             found_user.userSchools.Sort();
             return found_user.userSchools;

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
@@ -18,6 +19,7 @@ namespace SchoolChoicePlayground.Models
 
         [Key]
         public int AddressId { get; set; }
+        [JsonProperty("addressLine1")]
         public string Line1 { get; set; }
         public string Line2 { get; set; }
         public string city { get; set; }
