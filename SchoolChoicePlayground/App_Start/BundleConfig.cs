@@ -43,8 +43,12 @@ namespace SchoolChoicePlayground
                  "~/Content/Site.css"));
 
             bundles.Add(new StyleBundle("~/Content/myStyles").Include(
-                "~/Content/main.css"
-                ));
+                "~/Content/main.css"));
+
+            bundles.Add(new ScriptBundle("~/bundles/angularjs").Include(
+                "~/Scripts/angular.js",
+                "~/Scripts/angular-aria.js",
+                "~/Scripts/app.js"));
         }
     }
 }
