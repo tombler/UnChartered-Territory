@@ -2,21 +2,20 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using Twilio;
 
 namespace SchoolChoicePlayground.Models
 {
     public class AppRepository
     {
-        private SchoolAppContext _context;
-        public SchoolAppContext Context { get { return _context; } }
+        private AppContext _context;
+        public AppContext Context { get { return _context; } }
 
         public AppRepository()
         {
-            _context = new SchoolAppContext();
+            _context = new AppContext();
         }
 
-        public AppRepository(SchoolAppContext a_context)
+        public AppRepository(AppContext a_context)
         {
             _context = a_context;
         }
@@ -31,17 +30,17 @@ namespace SchoolChoicePlayground.Models
             return all_schools;
         }
 
-        public List<SchoolAppUser> GetAllUsers()
+        public List<User> GetAllUsers()
         {
-            var query = from users in _context.SchoolAppUsers select users;
-            List<SchoolAppUser> all_users = query.ToList();
+            var query = from users in _context.Users select users;
+            List<User> all_users = query.ToList();
             return all_users;
         }
 
         // Retrieve specific user's data (profile, schools)
-        public SchoolAppUser GetUserById(int id)
+        public User GetUserById(string id)
         {
-            var query = from user in _context.SchoolAppUsers where user.UserId == id select user;
+            var query = from user in _context.Users where user.UserId == id select user;
             return query.SingleOrDefault();
         }
 
@@ -62,19 +61,19 @@ namespace SchoolChoicePlayground.Models
             return query.Single<Address>();
         }
 
-        public void AddUserToContext(SchoolAppUser user_to_add)
+        public void AddUserToContext(User user_to_add)
         {
-            if (user_to_add.email != null)
-            {
-                CheckIfUserEmailExists(user_to_add.email);
-            }
-            _context.SchoolAppUsers.Add(user_to_add);
+            //if (user_to_add.email != null)
+            //{
+            //    CheckIfUserEmailExists(user_to_add.email);
+            //}
+            _context.Users.Add(user_to_add);
             _context.SaveChanges();
         }
 
         private void CheckIfUserEmailExists(string email)
         {
-            var query = from user in _context.SchoolAppUsers
+            var query = from user in _context.Users
                         where user.email == email
                         select user;
             if (query != null)
@@ -84,17 +83,17 @@ namespace SchoolChoicePlayground.Models
         }
 
         // Get User's schools
-        public List<School> GetUserSchools(SchoolAppUser currentUser)
+        public List<School> GetUserSchools(User currentUser)
         {
-            var query = from u in _context.SchoolAppUsers where u.UserId == currentUser.UserId select u;
-            SchoolAppUser found_user = query.Single<SchoolAppUser>();
+            var query = from u in _context.Users where u.UserId == currentUser.UserId select u;
+            User found_user = query.Single<User>();
             found_user.userSchools.Sort();
             return found_user.userSchools;
         }
 
         // Add to specific user's schools
         // Does this method really work?
-        public void AddSchoolToUserList(SchoolAppUser user, School school)
+        public void AddSchoolToUserList(User user, School school)
         {
             // Update user's list of schools
             if (user.userSchools == null)
@@ -108,7 +107,7 @@ namespace SchoolChoicePlayground.Models
 
         // Delete from user's schools
 
-        public void RemoveSchoolFromUserList(SchoolAppUser currentUser, School schoolToRemove)
+        public void RemoveSchoolFromUserList(User currentUser, School schoolToRemove)
         {
             currentUser.userSchools.Remove(schoolToRemove);
             _context.SaveChanges();

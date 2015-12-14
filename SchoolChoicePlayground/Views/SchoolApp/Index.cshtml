@@ -1,0 +1,18 @@
+﻿@model IEnumerable<SchoolChoicePlayground.Models.School>
+@{
+    ViewBag.Title = "Home";
+}
+
+<h2>All Charters</h2>
+
+@foreach (var item in Model)
+{
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="school">
+                @item.name
+            </div>
+        </div>
+    </div>
+}
+

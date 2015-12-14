@@ -18,6 +18,7 @@ namespace SchoolChoicePlayground.Models
         [Required]
         public string name { get; set; }
         public string grades { get; set; }
+        [Required]
         public virtual Address address { get; set; }
         [Phone]
         public string phoneNum { get; set; }
@@ -25,7 +26,7 @@ namespace SchoolChoicePlayground.Models
         public double lng { get; set; }
         [MaxLength(200)]
         public string addlInfo { get; set; }
-        public virtual List<SchoolAppUser> Users { get; set; }
+        public virtual List<User> Users { get; set; }
         [Required]
         public schoolLevel level { get; set; }
         public schoolType type { get; set; }

@@ -6,7 +6,7 @@ using System.Web;
 
 namespace SchoolChoicePlayground.Models
 {
-    public class AppContext : DbContext
+    public class AppContext : ApplicationDbContext
     {
         // IDbSet, IQueryable
         public virtual DbSet<School> Schools { get; set; }
