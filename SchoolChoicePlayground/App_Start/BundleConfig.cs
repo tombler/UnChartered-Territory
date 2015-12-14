@@ -41,6 +41,10 @@ namespace SchoolChoicePlayground
             bundles.Add(new StyleBundle("~/Content/css").Include(
                  "~/Content/bootstrap.css",
                  "~/Content/Site.css"));
+
+            bundles.Add(new StyleBundle("~/Content/myStyles").Include(
+                "~/Content/main.css"
+                ));
         }
     }
 }

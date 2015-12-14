@@ -38,7 +38,7 @@ namespace SchoolChoicePlayground.Models
         }
 
         // Retrieve specific user's data (profile, schools)
-        public User GetUserById(string id)
+        public User GetUserById(int id)
         {
             var query = from user in _context.SchoolUsers where user.UserId == id select user;
             return query.SingleOrDefault();
@@ -63,10 +63,6 @@ namespace SchoolChoicePlayground.Models
 
         public void AddUserToContext(User user_to_add)
         {
-            //if (user_to_add.email != null)
-            //{
-            //    CheckIfUserEmailExists(user_to_add.email);
-            //}
             _context.SchoolUsers.Add(user_to_add);
             _context.SaveChanges();
         }
@@ -148,6 +144,43 @@ namespace SchoolChoicePlayground.Models
         //    var twilio = new TwilioRestClient(AccountSid, AuthToken);
         //    var message = twilio.SendSmsMessage("+15088687169", "+15088687169", "Test", "");
         //}
+
+        public bool CheckIfUserExists(string user_id) // Real app user ID from Asp.Net
+        {
+            bool result = false;
+            if (_context.SchoolUsers != null)
+            {
+                List<User> all_users = GetAllUsers();
+                for (int i = 0; i < all_users.Count; i++)
+                {
+                    if (all_users[i].AspUser.Id == user_id)
+                    {
+                        result = true;
+                    }
+                } 
+            }
+            return result;
+        }
+
+        // If we've gotten to this method, the user is logged in and the DB has created an Asp.Net u
+        public void AddUserIfNoneExists(string user_id)
+        {
+            if ( !( CheckIfUserExists(user_id) ) ) // If user doesn't exist
+            {
+                // Get AspNet application user from DB
+                var query = from u in _context.Users
+                            where u.Id == user_id
+                            select u;
+                ApplicationUser this_user = query.Single();
+                // Add new SchoolUser -- Will UserId be automatically added??
+                _context.SchoolUsers.Add(new SchoolChoicePlayground.Models.User
+                {
+                    email = this_user.Email,
+                    AspUser = this_user
+                });
+                _context.SaveChanges();
+            }
+        }
 
     }
 }

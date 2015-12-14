@@ -19,15 +19,14 @@ namespace SchoolChoicePlayground.Controllers
 
         // GET: SchoolApp
         [Authorize]
-        public ActionResult Index(User currentUser)
+        public ActionResult Index()
         {
-            //if (currentUser != null)
-            //{
-            //Repo.AddUserToContext(currentUser);
-            //}
+            //string user_id = User.Identity.GetUserId();
 
+            //Repo.AddUserIfNoneExists(user_id);
             List<School> all_schools = Repo.GetAllSchools();
             return View(all_schools);
+            // !!!! Create new migration to fix properties!
         }
 
         // GET: SchoolApp/Details/5
