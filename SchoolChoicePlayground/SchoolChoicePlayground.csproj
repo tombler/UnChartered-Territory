@@ -217,6 +217,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\MeController.cs" />
+    <Compile Include="Controllers\SchoolApiController.cs" />
     <Compile Include="Controllers\SchoolApplicationController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -232,6 +233,14 @@
     <Compile Include="Migrations\201512141611034_RemovedRequiredNameFromUser.cs" />
     <Compile Include="Migrations\201512141611034_RemovedRequiredNameFromUser.Designer.cs">
       <DependentUpon>201512141611034_RemovedRequiredNameFromUser.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201512142117052_UpdatedUserForeignKey.cs" />
+    <Compile Include="Migrations\201512142117052_UpdatedUserForeignKey.Designer.cs">
+      <DependentUpon>201512142117052_UpdatedUserForeignKey.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201512142127214_ChangeAppUserPropToString.cs" />
+    <Compile Include="Migrations\201512142127214_ChangeAppUserPropToString.Designer.cs">
+      <DependentUpon>201512142127214_ChangeAppUserPropToString.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -1120,6 +1129,8 @@
     <Content Include="Views\SchoolApplication\Index.cshtml" />
     <Content Include="Views\Shared\_AppNav.cshtml" />
     <Content Include="Scripts\version.json" />
+    <Content Include="Views\SchoolApplication\UserProfile.cshtml" />
+    <Content Include="Views\SchoolApplication\SchoolProfile.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -1141,6 +1152,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201512141611034_RemovedRequiredNameFromUser.resx">
       <DependentUpon>201512141611034_RemovedRequiredNameFromUser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201512142117052_UpdatedUserForeignKey.resx">
+      <DependentUpon>201512142117052_UpdatedUserForeignKey.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201512142127214_ChangeAppUserPropToString.resx">
+      <DependentUpon>201512142127214_ChangeAppUserPropToString.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

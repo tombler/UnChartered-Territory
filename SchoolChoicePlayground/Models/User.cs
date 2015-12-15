@@ -15,6 +15,12 @@ namespace SchoolChoicePlayground.Models
         public string email { get; set; }
         public List<School> userSchools { get; set; }
         public bool alerts { get; set; }
-        public virtual ApplicationUser AspUser { get; set; }
+        [Required]
+        public virtual string AspUser { get; set; }
+
+        public User() {
+            userSchools = new List<School>();
+        }
+
     }
 }

@@ -39,6 +39,7 @@ namespace SchoolChoicePlayground.Tests.Models
             mock_user_set.As<IQueryable<User>>().Setup(data => data.Expression).Returns(data_source.Expression);
             mock_user_set.As<IQueryable<User>>().Setup(data => data.ElementType).Returns(data_source.ElementType);
             mock_user_set.As<IQueryable<User>>().Setup(data => data.GetEnumerator()).Returns(data_source.GetEnumerator());
+      
 
             mock_context.Setup(a => a.SchoolUsers).Returns(mock_user_set.Object);
         }
@@ -71,6 +72,7 @@ namespace SchoolChoicePlayground.Tests.Models
             };
             mock_user_set.Object.AddRange(users);
             ConnectMocksToDataStore(users);
+            mock_user_set.Setup(j => j.Add(It.IsAny<User>())).Callback((User s) => users.Add(s));
         }
 
         [TestInitialize]
@@ -133,10 +135,12 @@ namespace SchoolChoicePlayground.Tests.Models
         [TestMethod]
         public void AppRepoCanAddUser()
         {
+
             AddMockUsersAndSchoolsToDb();
-            var newUser = new User { UserId = 777, name = "Deliquent Parent" };
+            var newUser = new User { name = "Deliquent Parent" };
             _repository.AddUserToContext(newUser);
-            var all_users = _repository.GetAllUsers();
+            List<User> all_users = _repository.GetAllUsers();
+            Assert.AreEqual(3, all_users.Count);
         }
 
         [TestMethod]
@@ -320,7 +324,6 @@ namespace SchoolChoicePlayground.Tests.Models
             Address expected = _repository.GetSchoolAddress(123);
             Assert.AreEqual(expected.Line1, "1704 Herman St");
         }
-
 
     }
 }

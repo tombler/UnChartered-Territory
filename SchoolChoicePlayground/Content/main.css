@@ -1,3 +1,11 @@
 ﻿body {
     
 }
+
+#allSchoolsWrapper h3 {
+    text-align: center;
+}
+
+tr:hover {
+    cursor: pointer;
+}

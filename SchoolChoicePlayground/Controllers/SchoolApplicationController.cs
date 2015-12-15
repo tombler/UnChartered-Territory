@@ -21,25 +21,30 @@ namespace SchoolChoicePlayground.Controllers
         [Authorize]
         public ActionResult Index()
         {
-            //string user_id = User.Identity.GetUserId();
+            User new_user = new Models.User
+            {
+                email = "tom@tom.com",
+                alerts = false,
+                AspUser = User.Identity.GetUserId()
+            };
 
-            //Repo.AddUserIfNoneExists(user_id);
+            Repo.AddUserToContext(new_user);
             List<School> all_schools = Repo.GetAllSchools();
             return View(all_schools);
-            // !!!! Create new migration to fix properties!
         }
 
         // GET: SchoolApp/Details/5
         public ActionResult UserProfile()
         {
-            //string user_id = User.Identity.GetUserId();
-            //SchoolAppUser currentUser = Repo.GetAllUsers().Where(u => u.RealUser.Id == user_id).Single();
+            string user_id = User.Identity.GetUserId();
+            
             return View();
         }
 
         // GET: SchoolApp/Create
-        public ActionResult Create()
+        public ActionResult SchoolProfile()
         {
+
             return View();
         }
 

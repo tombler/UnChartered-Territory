@@ -44,6 +44,12 @@ namespace SchoolChoicePlayground.Models
             return query.SingleOrDefault();
         }
 
+        public ApplicationUser GetMyUserByAppUserById(string id)
+        {
+            var query = from user in _context.Users where user.Id == id select user;
+            return query.SingleOrDefault();
+        }
+
         // Get specific school
         public School GetSchoolById(int id)
         {
@@ -63,6 +69,7 @@ namespace SchoolChoicePlayground.Models
 
         public void AddUserToContext(User user_to_add)
         {
+           // user_to_add.userSchools = new List<School>();
             _context.SchoolUsers.Add(user_to_add);
             _context.SaveChanges();
         }
@@ -153,7 +160,7 @@ namespace SchoolChoicePlayground.Models
                 List<User> all_users = GetAllUsers();
                 for (int i = 0; i < all_users.Count; i++)
                 {
-                    if (all_users[i].AspUser.Id == user_id)
+                    if (all_users[i].AspUser == user_id)
                     {
                         result = true;
                     }
@@ -176,10 +183,44 @@ namespace SchoolChoicePlayground.Models
                 _context.SchoolUsers.Add(new SchoolChoicePlayground.Models.User
                 {
                     email = this_user.Email,
-                    AspUser = this_user
+                    AspUser = user_id
                 });
-                _context.SaveChanges();
+                //_context.SaveChanges();
             }
+        }
+
+        public void AddAUser(string app_user_id)
+        {
+            var query = from u in _context.Users
+                        where u.Id == app_user_id
+                        select u;
+            ApplicationUser this_user = query.Single();
+            _context.SchoolUsers.Add(new SchoolChoicePlayground.Models.User
+            {
+                email = this_user.Email,
+                AspUser = app_user_id
+            });
+            //_context.SaveChanges();
+        }
+
+        public bool AddAUserTest(User this_user)
+        {
+            bool is_added;
+            //if (GetAllUsers() == null)
+            //{
+                
+            //}
+            try
+            {
+                User added_user = _context.SchoolUsers.Add(this_user);
+                _context.SaveChanges();
+                is_added = true;
+            }
+            catch (Exception)
+            {
+                is_added = false;
+            }
+            return is_added;
         }
 
     }
