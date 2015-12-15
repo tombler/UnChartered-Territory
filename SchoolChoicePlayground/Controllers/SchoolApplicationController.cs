@@ -21,13 +21,14 @@ namespace SchoolChoicePlayground.Controllers
         [Authorize]
         public ActionResult Index()
         {
+
             MyUser new_user = new Models.MyUser
             {
-                email = "tom@tom.com",
+                email = User.Identity.GetUserName(),
                 alerts = false,
                 AspUser = User.Identity.GetUserId()
             };
-
+            // This method checks whether the user is already in DB.
             Repo.AddUserToContext(new_user);
             List<School> all_schools = Repo.GetAllSchools();
             return View(all_schools);

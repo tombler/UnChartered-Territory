@@ -12,6 +12,7 @@
 <body ng-app="schoolChoice">
     @Html.Partial("_AppNav")
     <div class="container body-content">
+        @*<div ng-view></div>*@
         @RenderBody()
         @RenderSection("SPAViews", required: false)
         <hr />

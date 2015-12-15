@@ -67,13 +67,6 @@ namespace SchoolChoicePlayground.Models
             return query.Single<Address>();
         }
 
-        public void AddUserToContext(MyUser user_to_add)
-        {
-           // user_to_add.userSchools = new List<School>();
-            _context.SchoolUsers.Add(user_to_add);
-            _context.SaveChanges();
-        }
-
         private void CheckIfUserEmailExists(string email)
         {
             var query = from user in _context.SchoolUsers
@@ -189,38 +182,17 @@ namespace SchoolChoicePlayground.Models
             }
         }
 
-        public void AddAUser(string app_user_id)
+        public void AddUserToContext(MyUser user_to_add)
         {
-            var query = from u in _context.Users
-                        where u.Id == app_user_id
-                        select u;
-            ApplicationUser this_user = query.Single();
-            _context.SchoolUsers.Add(new SchoolChoicePlayground.Models.MyUser
+            var query = (from u in _context.SchoolUsers
+                        where user_to_add.AspUser == u.AspUser
+                        select u).ToList();
+            
+            if (query.Count() == 0)
             {
-                email = this_user.Email,
-                AspUser = app_user_id
-            });
-            //_context.SaveChanges();
-        }
-
-        public bool AddAUserTest(MyUser this_user)
-        {
-            bool is_added;
-            //if (GetAllUsers() == null)
-            //{
-                
-            //}
-            try
-            {
-                MyUser added_user = _context.SchoolUsers.Add(this_user);
+                _context.SchoolUsers.Add(user_to_add);
                 _context.SaveChanges();
-                is_added = true;
             }
-            catch (Exception)
-            {
-                is_added = false;
-            }
-            return is_added;
         }
 
     }

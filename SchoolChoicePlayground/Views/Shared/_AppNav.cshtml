@@ -10,8 +10,9 @@
         </div>
         <div class="navbar-collapse collapse"> 
             <ul class="nav navbar-nav navbar-right">
-                <li>@Html.ActionLink("Profile", "UserProfile", "SchoolApplication", new { area = "" }, null)</li>
-                @*<li>@Html.ActionLink("API", "Index", "Help", new { area = "HelpPage" }, null)</li>*@
+                @*<li><a href="/#/schoolProfile">Profile</a></li>*@
+                @*This was the original link to call views server-side*@
+                @Html.ActionLink("Profile", "UserProfile", "SchoolApplication", new { area = "" }, null)
             </ul>
             @Html.Partial("_LoginPartial")
         </div>
