@@ -27,7 +27,7 @@ namespace SchoolChoicePlayground.Models
         public double lng { get; set; }
         [MaxLength(200)]
         public string addlInfo { get; set; }
-        public virtual List<User> Users { get; set; }
+        public virtual List<MyUser> MyUsers { get; set; }
         [Required]
         [JsonProperty("schoolLevel")]
         public schoolLevel level { get; set; }

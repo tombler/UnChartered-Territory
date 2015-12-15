@@ -13,7 +13,7 @@ namespace SchoolChoicePlayground.Tests
     {
         private Mock<SchoolChoicePlayground.Models.AppContext> mock_context;
         private Mock<DbSet<School>> mock_school_set;
-        private Mock<DbSet<User>> mock_user_set;
+        private Mock<DbSet<MyUser>> mock_user_set;
         private Mock<DbSet<ApplicationUser>> mock_app_user_set;
         private Mock<DbSet<Alert>> mock_alert_set;
         private Mock<DbSet<Address>> mock_address_set;
@@ -33,13 +33,13 @@ namespace SchoolChoicePlayground.Tests
             mock_context.Setup(a => a.Schools).Returns(mock_school_set.Object);
         }
 
-        private void ConnectMocksToDataStore(IEnumerable<User> data_store)
+        private void ConnectMocksToDataStore(IEnumerable<MyUser> data_store)
         {
-            var data_source = data_store.AsQueryable<User>();
-            mock_user_set.As<IQueryable<User>>().Setup(data => data.Provider).Returns(data_source.Provider);
-            mock_user_set.As<IQueryable<User>>().Setup(data => data.Expression).Returns(data_source.Expression);
-            mock_user_set.As<IQueryable<User>>().Setup(data => data.ElementType).Returns(data_source.ElementType);
-            mock_user_set.As<IQueryable<User>>().Setup(data => data.GetEnumerator()).Returns(data_source.GetEnumerator());
+            var data_source = data_store.AsQueryable<MyUser>();
+            mock_user_set.As<IQueryable<MyUser>>().Setup(data => data.Provider).Returns(data_source.Provider);
+            mock_user_set.As<IQueryable<MyUser>>().Setup(data => data.Expression).Returns(data_source.Expression);
+            mock_user_set.As<IQueryable<MyUser>>().Setup(data => data.ElementType).Returns(data_source.ElementType);
+            mock_user_set.As<IQueryable<MyUser>>().Setup(data => data.GetEnumerator()).Returns(data_source.GetEnumerator());
 
             mock_context.Setup(a => a.SchoolUsers).Returns(mock_user_set.Object);
         }
@@ -76,10 +76,10 @@ namespace SchoolChoicePlayground.Tests
             mock_school_set.Object.AddRange(schools);
             ConnectMocksToDataStore(schools);
 
-            var users = new List<User>
+            var users = new List<MyUser>
             {
-                new User {UserId = 123, name = "Tom Griffey" },
-                new User {UserId = 456, name = "Soccer Mom"}
+                new MyUser {UserId = 123, name = "Tom Griffey" },
+                new MyUser {UserId = 456, name = "Soccer Mom"}
             };
             mock_user_set.Object.AddRange(users);
             ConnectMocksToDataStore(users);
@@ -90,7 +90,7 @@ namespace SchoolChoicePlayground.Tests
         {
             mock_context = new Mock<SchoolChoicePlayground.Models.AppContext>();
             mock_school_set = new Mock<DbSet<School>>();
-            mock_user_set = new Mock<DbSet<User>>();
+            mock_user_set = new Mock<DbSet<MyUser>>();
             //mock_app_user new Mock<ApplicationUser>>();
             _repository = new AppRepository(mock_context.Object);
         }

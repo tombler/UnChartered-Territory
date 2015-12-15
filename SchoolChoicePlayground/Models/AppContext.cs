@@ -11,7 +11,7 @@ namespace SchoolChoicePlayground.Models
         // IDbSet, IQueryable
         public virtual DbSet<School> Schools { get; set; }
         public virtual DbSet<Address> Addresses { get; set; }
-        public virtual DbSet<User> SchoolUsers { get; set; }
+        public virtual DbSet<MyUser> SchoolUsers { get; set; }
         public virtual DbSet<Alert> Alerts { get; set; }
 
         //public override int SaveChanges()

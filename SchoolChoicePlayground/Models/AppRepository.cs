@@ -30,15 +30,15 @@ namespace SchoolChoicePlayground.Models
             return all_schools;
         }
 
-        public List<User> GetAllUsers()
+        public List<MyUser> GetAllUsers()
         {
             var query = from users in _context.SchoolUsers select users;
-            List<User> all_users = query.ToList();
+            List<MyUser> all_users = query.ToList();
             return all_users;
         }
 
         // Retrieve specific user's data (profile, schools)
-        public User GetUserById(int id)
+        public MyUser GetUserById(int id)
         {
             var query = from user in _context.SchoolUsers where user.UserId == id select user;
             return query.SingleOrDefault();
@@ -67,7 +67,7 @@ namespace SchoolChoicePlayground.Models
             return query.Single<Address>();
         }
 
-        public void AddUserToContext(User user_to_add)
+        public void AddUserToContext(MyUser user_to_add)
         {
            // user_to_add.userSchools = new List<School>();
             _context.SchoolUsers.Add(user_to_add);
@@ -86,17 +86,17 @@ namespace SchoolChoicePlayground.Models
         }
 
         // Get User's schools
-        public List<School> GetUserSchools(User currentUser)
+        public List<School> GetUserSchools(MyUser currentUser)
         {
             var query = from u in _context.SchoolUsers where u.UserId == currentUser.UserId select u;
-            User found_user = query.Single<User>();
+            MyUser found_user = query.Single<MyUser>();
             found_user.userSchools.Sort();
             return found_user.userSchools;
         }
 
         // Add to specific user's schools
         // Does this method really work?
-        public void AddSchoolToUserList(User user, School school)
+        public void AddSchoolToUserList(MyUser user, School school)
         {
             // Update user's list of schools
             if (user.userSchools == null)
@@ -110,7 +110,7 @@ namespace SchoolChoicePlayground.Models
 
         // Delete from user's schools
 
-        public void RemoveSchoolFromUserList(User currentUser, School schoolToRemove)
+        public void RemoveSchoolFromUserList(MyUser currentUser, School schoolToRemove)
         {
             currentUser.userSchools.Remove(schoolToRemove);
             _context.SaveChanges();
@@ -157,7 +157,7 @@ namespace SchoolChoicePlayground.Models
             bool result = false;
             if (_context.SchoolUsers != null)
             {
-                List<User> all_users = GetAllUsers();
+                List<MyUser> all_users = GetAllUsers();
                 for (int i = 0; i < all_users.Count; i++)
                 {
                     if (all_users[i].AspUser == user_id)
@@ -180,7 +180,7 @@ namespace SchoolChoicePlayground.Models
                             select u;
                 ApplicationUser this_user = query.Single();
                 // Add new SchoolUser -- Will UserId be automatically added??
-                _context.SchoolUsers.Add(new SchoolChoicePlayground.Models.User
+                _context.SchoolUsers.Add(new SchoolChoicePlayground.Models.MyUser
                 {
                     email = this_user.Email,
                     AspUser = user_id
@@ -195,7 +195,7 @@ namespace SchoolChoicePlayground.Models
                         where u.Id == app_user_id
                         select u;
             ApplicationUser this_user = query.Single();
-            _context.SchoolUsers.Add(new SchoolChoicePlayground.Models.User
+            _context.SchoolUsers.Add(new SchoolChoicePlayground.Models.MyUser
             {
                 email = this_user.Email,
                 AspUser = app_user_id
@@ -203,7 +203,7 @@ namespace SchoolChoicePlayground.Models
             //_context.SaveChanges();
         }
 
-        public bool AddAUserTest(User this_user)
+        public bool AddAUserTest(MyUser this_user)
         {
             bool is_added;
             //if (GetAllUsers() == null)
@@ -212,7 +212,7 @@ namespace SchoolChoicePlayground.Models
             //}
             try
             {
-                User added_user = _context.SchoolUsers.Add(this_user);
+                MyUser added_user = _context.SchoolUsers.Add(this_user);
                 _context.SaveChanges();
                 is_added = true;
             }

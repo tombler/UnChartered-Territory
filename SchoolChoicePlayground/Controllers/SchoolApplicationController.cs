@@ -21,7 +21,7 @@ namespace SchoolChoicePlayground.Controllers
         [Authorize]
         public ActionResult Index()
         {
-            User new_user = new Models.User
+            MyUser new_user = new Models.MyUser
             {
                 email = "tom@tom.com",
                 alerts = false,
