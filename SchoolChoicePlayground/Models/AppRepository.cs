@@ -38,10 +38,13 @@ namespace SchoolChoicePlayground.Models
         }
 
         // Retrieve specific user's data (profile, schools)
-        public MyUser GetUserById(int id)
+        public MyUser GetUserById(string asp_id)
         {
-            var query = from user in _context.SchoolUsers where user.UserId == id select user;
-            return query.SingleOrDefault();
+
+            var query = from user in _context.Users where user.Id == asp_id select user.Id;
+            string app_user_id = query.Single().ToString();
+            var query2 = from user in _context.SchoolUsers where user.AspUser == app_user_id select user;
+            return query2.First();
         }
 
         public ApplicationUser GetMyUserByAppUserById(string id)

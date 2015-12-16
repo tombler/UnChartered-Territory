@@ -169,161 +169,161 @@ namespace SchoolChoicePlayground.Tests.Models
             _repository.AddUserToContext(second_user);
         }
 
-        [TestMethod]
-        public void AppRepoGetUserById()
-        {
-            // Arrange
-            var expected = new List<MyUser>
-            {
-                new MyUser {UserId = 123, name = "Tom Griffey" },
-                 new MyUser {UserId = 456, name = "Soccer Mom" }
-            };
-            mock_user_set.Object.AddRange(expected);
-            ConnectMocksToDataStore(expected);
-            // Act
-            var actual = _repository.GetUserById(456);
-            // Assert
-            Assert.AreEqual("Soccer Mom", actual.name);
-        }
+        //[TestMethod]
+        //public void AppRepoGetUserById()
+        //{
+        //    // Arrange
+        //    var expected = new List<MyUser>
+        //    {
+        //        new MyUser {UserId = 123, name = "Tom Griffey" },
+        //         new MyUser {UserId = 456, name = "Soccer Mom" }
+        //    };
+        //    mock_user_set.Object.AddRange(expected);
+        //    ConnectMocksToDataStore(expected);
+        //    // Act
+        //    var actual = _repository.GetUserById(456);
+        //    // Assert
+        //    Assert.AreEqual("Soccer Mom", actual.name);
+        //}
 
-        [TestMethod]
-        public void AppRepoCanGetAllSchoolsForUser() // Returned list should be sorted
-        {
-            //Arrange
-            AddMockUsersAndSchoolsToDb();
-            var currentUser = _repository.GetUserById(123);
-            currentUser.userSchools = new List<School> {
-                new School { SchoolId = 123, name = "LEAD Academy" },
-                new School { SchoolId = 456, name = "Rocketship Academy" },
-                new School { SchoolId = 789, name = "Brick Church Prep" }
-            };
+        //[TestMethod]
+        //public void AppRepoCanGetAllSchoolsForUser() // Returned list should be sorted
+        //{
+        //    //Arrange
+        //    AddMockUsersAndSchoolsToDb();
+        //    var currentUser = _repository.GetUserById(123);
+        //    currentUser.userSchools = new List<School> {
+        //        new School { SchoolId = 123, name = "LEAD Academy" },
+        //        new School { SchoolId = 456, name = "Rocketship Academy" },
+        //        new School { SchoolId = 789, name = "Brick Church Prep" }
+        //    };
 
-            List<School> currentUserSchools = _repository.GetUserSchools(currentUser);
-            Assert.AreEqual(3, currentUserSchools.Count());
-            Assert.AreEqual("Brick Church Prep", currentUserSchools.First().name);
-        }
+        //    List<School> currentUserSchools = _repository.GetUserSchools(currentUser);
+        //    Assert.AreEqual(3, currentUserSchools.Count());
+        //    Assert.AreEqual("Brick Church Prep", currentUserSchools.First().name);
+        //}
 
-        [TestMethod]
-        public void AppRepoCanGetSchoolById()
-        {
-            //Arrange
-            List<School> schools = new List<School> {
-                new School { SchoolId = 123, name = "LEAD Academy" },
-                new School { SchoolId = 456, name = "Rocketship Academy" }
-            };
-            mock_school_set.Object.AddRange(schools);
-            ConnectMocksToDataStore(schools);
-            //Act
-            School expected = _repository.GetSchoolById(456);
-            //Assert
-            Assert.AreEqual(expected.name, "Rocketship Academy");
-        }
+        //[TestMethod]
+        //public void AppRepoCanGetSchoolById()
+        //{
+        //    //Arrange
+        //    List<School> schools = new List<School> {
+        //        new School { SchoolId = 123, name = "LEAD Academy" },
+        //        new School { SchoolId = 456, name = "Rocketship Academy" }
+        //    };
+        //    mock_school_set.Object.AddRange(schools);
+        //    ConnectMocksToDataStore(schools);
+        //    //Act
+        //    School expected = _repository.GetSchoolById(456);
+        //    //Assert
+        //    Assert.AreEqual(expected.name, "Rocketship Academy");
+        //}
 
-        [TestMethod]
-        [ExpectedException(typeof(InvalidOperationException))]
-        public void AppRepoGetSchoolByIdFailsIfIdDoesntExist()
-        {
-            //Arrange
-            List<School> schools = new List<School> {
-                new School { SchoolId = 123, name = "LEAD Academy" },
-                new School { SchoolId = 456, name = "Rocketship Academy" }
-            };
-            mock_school_set.Object.AddRange(schools);
-            ConnectMocksToDataStore(schools);
-            //Act
-            School expected = _repository.GetSchoolById(8882);
-        }
+        //[TestMethod]
+        //[ExpectedException(typeof(InvalidOperationException))]
+        //public void AppRepoGetSchoolByIdFailsIfIdDoesntExist()
+        //{
+        //    //Arrange
+        //    List<School> schools = new List<School> {
+        //        new School { SchoolId = 123, name = "LEAD Academy" },
+        //        new School { SchoolId = 456, name = "Rocketship Academy" }
+        //    };
+        //    mock_school_set.Object.AddRange(schools);
+        //    ConnectMocksToDataStore(schools);
+        //    //Act
+        //    School expected = _repository.GetSchoolById(8882);
+        //}
 
-        [TestMethod]
-        public void AppRepoUserCanAddSchoolsEmptyList()
-        {
-            //Arrange
-            AddMockUsersAndSchoolsToDb();
-            var currentUser = _repository.GetUserById(123); // User has no schools in their list
-            var schoolToAdd = _repository.GetSchoolById(456);
-            //mock_user_set.Setup(u => u.).Add(It.IsAny<School>()).Callback((School s) => expectedUserSchools.Add(s));
-            //Act
-            _repository.AddSchoolToUserList(currentUser, schoolToAdd);
-            //Assert
-            Assert.AreEqual(1, currentUser.userSchools.Count());
-            Assert.IsInstanceOfType(currentUser.userSchools.First(), typeof(School));
-            // Why does this fail / how does Mock db store List of userSchools?
-            //CollectionAssert.AreEqual(expectedUserSchools, currentUser.userSchools);
-        }
+        //[TestMethod]
+        //public void AppRepoUserCanAddSchoolsEmptyList()
+        //{
+        //    //Arrange
+        //    AddMockUsersAndSchoolsToDb();
+        //    var currentUser = _repository.GetUserById(123); // User has no schools in their list
+        //    var schoolToAdd = _repository.GetSchoolById(456);
+        //    //mock_user_set.Setup(u => u.).Add(It.IsAny<School>()).Callback((School s) => expectedUserSchools.Add(s));
+        //    //Act
+        //    _repository.AddSchoolToUserList(currentUser, schoolToAdd);
+        //    //Assert
+        //    Assert.AreEqual(1, currentUser.userSchools.Count());
+        //    Assert.IsInstanceOfType(currentUser.userSchools.First(), typeof(School));
+        //    // Why does this fail / how does Mock db store List of userSchools?
+        //    //CollectionAssert.AreEqual(expectedUserSchools, currentUser.userSchools);
+        //}
 
-        [TestMethod]
-        public void AppRepoUserCanAddSchoolToExistingList()
-        {
-            //Arrange
-            AddMockUsersAndSchoolsToDb();
-            var currentUser = _repository.GetUserById(456);
-            currentUser.userSchools = new List<School> {
-                new School { SchoolId = 123, name = "LEAD Academy" },
-                new School { SchoolId = 456, name = "Rocketship Academy" }
-            };
-            var schoolToAdd = _repository.GetSchoolById(4326);
-            //Act
-            _repository.AddSchoolToUserList(currentUser, schoolToAdd);
-            //Assert
-            Assert.AreEqual(3, currentUser.userSchools.Count());
-        }
+        //[TestMethod]
+        //public void AppRepoUserCanAddSchoolToExistingList()
+        //{
+        //    //Arrange
+        //    AddMockUsersAndSchoolsToDb();
+        //    var currentUser = _repository.GetUserById(456);
+        //    currentUser.userSchools = new List<School> {
+        //        new School { SchoolId = 123, name = "LEAD Academy" },
+        //        new School { SchoolId = 456, name = "Rocketship Academy" }
+        //    };
+        //    var schoolToAdd = _repository.GetSchoolById(4326);
+        //    //Act
+        //    _repository.AddSchoolToUserList(currentUser, schoolToAdd);
+        //    //Assert
+        //    Assert.AreEqual(3, currentUser.userSchools.Count());
+        //}
 
-        [TestMethod]
-        public void AppRepoCanUpdateUserProfileEmptyFields()
-        {
-            AddMockUsersAndSchoolsToDb();
-            var currentUser = _repository.GetUserById(456); // only has name
-            currentUser.phoneNum = "555-555-5555";
-            currentUser.email = "tgriffey@charter.net";
-            //_repository.UpdateUserProfile();
-        }
+        //[TestMethod]
+        //public void AppRepoCanUpdateUserProfileEmptyFields()
+        //{
+        //    AddMockUsersAndSchoolsToDb();
+        //    var currentUser = _repository.GetUserById(456); // only has name
+        //    currentUser.phoneNum = "555-555-5555";
+        //    currentUser.email = "tgriffey@charter.net";
+        //    //_repository.UpdateUserProfile();
+        //}
 
-        [TestMethod]
-        public void AppRepoUserCanAddMultipleSchools()
-        {
-            AddMockUsersAndSchoolsToDb();
-            var currentUser = _repository.GetUserById(123);
-            var schoolToAdd1 = _repository.GetSchoolById(456);
-            var schoolToAdd2 = _repository.GetSchoolById(123);
-            _repository.AddSchoolToUserList(currentUser, schoolToAdd1);
-            _repository.AddSchoolToUserList(currentUser, schoolToAdd2);
+        //[TestMethod]
+        //public void AppRepoUserCanAddMultipleSchools()
+        //{
+        //    AddMockUsersAndSchoolsToDb();
+        //    var currentUser = _repository.GetUserById(123);
+        //    var schoolToAdd1 = _repository.GetSchoolById(456);
+        //    var schoolToAdd2 = _repository.GetSchoolById(123);
+        //    _repository.AddSchoolToUserList(currentUser, schoolToAdd1);
+        //    _repository.AddSchoolToUserList(currentUser, schoolToAdd2);
 
-            Assert.AreEqual(2, currentUser.userSchools.Count());
-        }
+        //    Assert.AreEqual(2, currentUser.userSchools.Count());
+        //}
 
-        [TestMethod]
-        public void AppRepoUserCanRemoveSchoolFromList()
-        {
-            AddMockUsersAndSchoolsToDb();
-            var currentUser = _repository.GetUserById(123);
-            var schoolToAdd1 = _repository.GetSchoolById(456);
-            var schoolToAdd2 = _repository.GetSchoolById(123);
-            _repository.AddSchoolToUserList(currentUser, schoolToAdd1);
-            _repository.AddSchoolToUserList(currentUser, schoolToAdd2);
-            School schoolToRemove = _repository.GetSchoolById(123);
-            //Act
-            _repository.RemoveSchoolFromUserList(currentUser, schoolToRemove);
-            //Assert
-            Assert.AreEqual(1, currentUser.userSchools.Count());
-        }
+        //[TestMethod]
+        //public void AppRepoUserCanRemoveSchoolFromList()
+        //{
+        //    AddMockUsersAndSchoolsToDb();
+        //    var currentUser = _repository.GetUserById(123);
+        //    var schoolToAdd1 = _repository.GetSchoolById(456);
+        //    var schoolToAdd2 = _repository.GetSchoolById(123);
+        //    _repository.AddSchoolToUserList(currentUser, schoolToAdd1);
+        //    _repository.AddSchoolToUserList(currentUser, schoolToAdd2);
+        //    School schoolToRemove = _repository.GetSchoolById(123);
+        //    //Act
+        //    _repository.RemoveSchoolFromUserList(currentUser, schoolToRemove);
+        //    //Assert
+        //    Assert.AreEqual(1, currentUser.userSchools.Count());
+        //}
 
-        [TestMethod]
-        public void AppRepoCanRetrieveAddressOfSchool()
-        {
-            List<School> schools = new List<School> {
-                new School { SchoolId = 123,
-                    name = "LEAD Academy",
-                    address = new Address { Line1 = "1704 Herman St", city = "Nashville", state = Address.State.TN, zip = "37208" }
-                },
-                new School { SchoolId = 456, name = "Rocketship Academy" }
-            };
-            mock_school_set.Object.AddRange(schools);
-            ConnectMocksToDataStore(schools);
+        //[TestMethod]
+        //public void AppRepoCanRetrieveAddressOfSchool()
+        //{
+        //    List<School> schools = new List<School> {
+        //        new School { SchoolId = 123,
+        //            name = "LEAD Academy",
+        //            address = new Address { Line1 = "1704 Herman St", city = "Nashville", state = Address.State.TN, zip = "37208" }
+        //        },
+        //        new School { SchoolId = 456, name = "Rocketship Academy" }
+        //    };
+        //    mock_school_set.Object.AddRange(schools);
+        //    ConnectMocksToDataStore(schools);
 
 
-            Address expected = _repository.GetSchoolAddress(123);
-            Assert.AreEqual(expected.Line1, "1704 Herman St");
-        }
+        //    Address expected = _repository.GetSchoolAddress(123);
+        //    Assert.AreEqual(expected.Line1, "1704 Herman St");
+        //}
 
     }
 }

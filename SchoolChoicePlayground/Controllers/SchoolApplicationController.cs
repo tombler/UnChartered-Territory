@@ -38,8 +38,8 @@ namespace SchoolChoicePlayground.Controllers
         public ActionResult UserProfile()
         {
             string user_id = User.Identity.GetUserId();
-            
-            return View();
+            MyUser current_user = Repo.GetUserById(user_id);
+            return View(current_user);
         }
 
         // GET: SchoolApp/Create
@@ -107,6 +107,12 @@ namespace SchoolChoicePlayground.Controllers
             {
                 return View();
             }
+        }
+
+        public string GetUserId()
+        {
+            string user_id = User.Identity.GetUserId();
+            return user_id;
         }
     }
 }
