@@ -13,6 +13,9 @@ namespace SchoolChoicePlayground
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
+            //Ignore routes to angular templates.
+            routes.IgnoreRoute("angularviews/{*pathInfo}");
+
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",

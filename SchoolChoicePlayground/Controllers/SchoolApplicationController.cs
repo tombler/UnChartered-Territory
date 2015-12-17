@@ -34,7 +34,6 @@ namespace SchoolChoicePlayground.Controllers
             return View(all_schools);
         }
 
-        // GET: SchoolApp/Details/5
         public ActionResult UserProfile()
         {
             string user_id = User.Identity.GetUserId();

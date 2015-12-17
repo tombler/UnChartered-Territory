@@ -3,20 +3,31 @@
     ViewBag.Title = "Profile";
 }
 <div id="profileWrapper" ng-controller="UserProfileController">
+
     <div class="row">
         <div class="col-lg-2"></div>
         <div class="col-lg-8">
             <div id="profileInfo">
-                <h2 ng-model="user.name"></h2>
+                <h2 ng-model="user.name">@Model.name</h2>
                 <label>Email: </label>
-                <div ng-model="user.email"></div>
+                <div ng-model="user.email">@Model.email</div>
                 <label>Phone number: </label>
-                <div ng-model="user.phoneNum"></div>
+                <div ng-model="user.phoneNum">@Model.phoneNum</div>
                 <label>Alerts: </label>
-                <div ng-model="user.alerts"></div>
+                <div ng-model="user.alerts">@Model.alerts</div>
                 <div id="userId">@Model.AspUser</div>
             </div>
-            <div class="col-lg-2"></div>
         </div>
+        <div class="col-lg-2"></div>
+    </div>
+    <div class="row">
+        <div class="col-lg-2"></div>
+        <div class="col-lg-8">
+            <button>See MySchools</button>
+            <button><a href="">Edit Profile</a></button>
+        </div>
+        <div class="col-lg-2"></div>
     </div>
 </div>
+
+

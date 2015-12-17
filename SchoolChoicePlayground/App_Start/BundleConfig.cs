@@ -48,7 +48,8 @@ namespace SchoolChoicePlayground
             bundles.Add(new ScriptBundle("~/bundles/angularjs").Include(
                 "~/Scripts/angular.js",
                 "~/Scripts/angular-aria.js",
-                "~/Scripts/angular-route.js",
+                "~/Scripts/angular-ui/ui-bootstrap.min.js",
+                "~/Scripts/angular-ui/ui-bootstrap-tpls.min.js",
                 "~/Scripts/app.js"));
         }
     }

@@ -198,5 +198,18 @@ namespace SchoolChoicePlayground.Models
             }
         }
 
+        public void UpdateUserProfile(MyUser updatedUser)
+        {
+            MyUser userToUpdate = _context.SchoolUsers.Where(u => u.UserId == updatedUser.UserId).FirstOrDefault();
+
+            if (userToUpdate != null)
+            {
+                userToUpdate.email = updatedUser.email;
+                userToUpdate.phoneNum = updatedUser.phoneNum;
+                userToUpdate.name = updatedUser.name;
+                userToUpdate.alerts = updatedUser.alerts;
+                _context.SaveChanges();
+            }
+        }
     }
 }
